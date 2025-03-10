@@ -1,0 +1,56 @@
+#root {
+    background-color: rgb(28, 36, 39);
+    color: #0ee7f2;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.row {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.movie-card {
+  margin-bottom: 0 !important;
+}
+
+.row.flex-nowrap.overflow-auto {
+  overflow-x: auto;  /* Allow horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scrollbar */
+  white-space: nowrap; /* Keep items in a single row */
+  max-width: 100%;
+  flex-wrap: nowrap;
+}
+
+.card-title, .card-text {
+  white-space: nowrap;  /* Prevent text from wrapping */
+  overflow: hidden;  /* Hide overflowing text */
+  text-overflow: ellipsis;  /* Show "..." when text is too long */
+  max-width: 100%;  /* Ensure text doesn't exceed card width */
+}
+
+.card-text:hover {
+  white-space: normal; /* Allow text to wrap when hovering */
+  overflow: visible;
+  background: rgba(0, 0, 0, 0.7); /* Optional: Make text readable */
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+}
+
+.card-title:hover {
+  white-space: normal;  /* Allow full text to be visible */
+  overflow: visible;
+  background: rgba(0, 0, 0, 0.7); /* Optional: Better readability */
+  color: #ffffff;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 10;
+}
+
