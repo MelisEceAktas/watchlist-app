@@ -31,10 +31,33 @@ function AccountPage({ user, logout, updateUser }: Props) {
   const [alertVisible, setAlertVisible] = useState(false);
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
+  const [showUsernameForm, setShowUsernameForm] = useState(false);
+  const [newUsername, setNewUsername] = useState("");
+
+  const handleChangeUsername = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.put(
+        `http://localhost:3000/api/users/${user._id}/username`,
+        { newUsername }
+      );
+
+      console.log("✅ Username updated:", response.data);
+      updateUser({ ...user, username: newUsername }); // Update UI
+      setShowUsernameForm(false); // Close the form after success
+    } catch (error) {
+      console.error("❌ Error updating username:", error);
+    }
+  };
 
   const handleLogout = () => {
     logout();
     navigate("/login");
+  };
+
+  const openChangeUsername = () => {
+    setShowUsernameForm(true);
   };
 
   useEffect(() => {
@@ -136,12 +159,37 @@ function AccountPage({ user, logout, updateUser }: Props) {
       )}
       <div className="container mt-4">
         <div className="d-flex justify-content-end">
-          <Button color="outline-success" onClick={handleLogout}>
-            Change Username
-          </Button>
-          <Button color="outline-success" onClick={handleLogout}>
-            Change Password
-          </Button>
+          {!showUsernameForm && (
+            <Button color="outline-success" onClick={openChangeUsername}>
+              Change Username
+            </Button>
+          )}
+          {showUsernameForm && (
+            <div className="popup">
+              <div className="popup-content">
+                <h5>Change Username</h5>
+                <form onSubmit={handleChangeUsername}>
+                  <input
+                    type="text"
+                    placeholder="New username"
+                    value={newUsername}
+                    onChange={(e) => setNewUsername(e.target.value)}
+                    required
+                  />
+                  <button type="submit" className="btn btn-success">
+                    Save
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => setShowUsernameForm(false)}
+                  >
+                    Cancel
+                  </button>
+                </form>
+              </div>
+            </div>
+          )}
           <Button color="outline-warning" onClick={handleLogout}>
             Logout
           </Button>

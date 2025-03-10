@@ -68,8 +68,9 @@ const addUser =  async(req, res) =>{
 
 const changeName =  async(req, res) =>{
   try{
+    const { newUsername } = req.body;
     const { id } = req.params; // from htpl req
-    const user = await User.findByIdAndUpdate(id, {name: req.body.name}) ;
+    const user = await User.findByIdAndUpdate(id, {username: newUsername}) ;
 
     if(!user){
       return res.status(404).json({message: "User not found"});
