@@ -1,0 +1,10 @@
+#root {
+    background-color: rgb(28, 36, 39);
+    color: #0ee7f2;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
