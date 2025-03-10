@@ -28,8 +28,8 @@ const getUser = async(req, res) =>{
 //getUser with name
 const getUserWithName = async(req, res) =>{
   try{
-    const {name, password } = req.body;
-    const user = await User.findOne({ name });
+    const {username, password } = req.body;
+    const user = await User.findOne({ username });
     if(!password == user.password) {
       return res.status(400).json({message: "Cannot login because incorrect password!"});
     }
@@ -45,14 +45,18 @@ const getUserWithName = async(req, res) =>{
 //add user to database (name, password)
 const addUser =  async(req, res) =>{
     try{
-      const { name} = req.body;
-      const existingUser = await User.findOne({ name });
+      const { username } = req.body;
+      if (!username) {
+        return res.status(400).json({ message: "Username is required" });
+      }
+      const existingUser = await User.findOne({ username });
 
       if (existingUser) {
         return res.status(400).json({ message: "Username already exists" });
       }
 
       const user = await User.create(req.body);
+
       res.status(200).json(user);
     }catch(error){
         res.status(500).json({message: error.message});

@@ -28,6 +28,7 @@ function Signup() {
       navigate("/");
     } catch (error: any) {
       setError(error.response?.data?.error || "Signup failed");
+      setAlertVisible(true);
     }
   };
 

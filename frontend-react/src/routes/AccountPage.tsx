@@ -13,7 +13,7 @@ interface User {
 interface Movie {
   id: string;
   title: string;
-  genres: string[];
+  genreNames: string[];
   poster_path: string;
   release_date: string;
 }
@@ -61,9 +61,10 @@ function AccountPage({ user, logout, updateUser }: Props) {
 
   const fetchMovieById = async (movieId: number) => {
     try {
-      const response = await axios.get("http://localhost:3000/api/movies", {
-        params: { movieId },
-      });
+      console.log(movieId);
+      const response = await axios.get(
+        "http://localhost:3000/api/movies/" + movieId
+      );
 
       if (response.status === 200 && response.data) {
         return response.data;
@@ -78,10 +79,9 @@ function AccountPage({ user, logout, updateUser }: Props) {
 
   const searchMovie = async (title: string) => {
     try {
-      const response = await axios.get(
-        "http://localhost:3000/api/users/login",
-        { params: { title } }
-      );
+      const response = await axios.get("http://localhost:3000/api/movies", {
+        params: { title },
+      });
       return response.data;
     } catch (error) {
       setError("Movie not found. Please try another title.");
@@ -96,7 +96,7 @@ function AccountPage({ user, logout, updateUser }: Props) {
       .value;
     const movie = await searchMovie(query);
     if (movie && !user.movies.some((m) => m === movie.id)) {
-      const updatedUser = { ...user, movies: [...user.movies, movie] };
+      const updatedUser = { ...user, movies: [...user.movies, movie.id] };
       updateUser(updatedUser);
       (document.getElementById("searchInput") as HTMLInputElement).value = "";
     } else {
@@ -141,19 +141,22 @@ function AccountPage({ user, logout, updateUser }: Props) {
         {movies.length > 0 ? (
           movies.map((movie) => (
             <div key={movie.id} className="col-md-4 mb-4">
-              <div className="card shadow-sm">
+              <div className="card shadow-sm" style={{ width: "16rem" }}>
                 <img
-                  src={
-                    "https://image.tmdb.org/t/p/original" + movie.poster_path
-                  }
+                  src={"https://image.tmdb.org/t/p/w300" + movie.poster_path}
                   className="card-img-top"
                   alt={movie.title}
-                  style={{ height: "300px", objectFit: "cover" }}
+                  style={{
+                    height: "300px",
+                    width: "254px",
+                    objectFit: "cover",
+                  }}
                 />
                 <div className="card-body">
                   <h5 className="card-title">{movie.title}</h5>
                   <p className="card-text">
-                    <strong>Genres:</strong> {movie.genres.join(", ")}
+                    <strong>Genres:</strong>
+                    {movie.genreNames}
                   </p>
                   <p className="card-text">
                     <strong>Release Date:</strong> {movie.release_date}

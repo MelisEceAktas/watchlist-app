@@ -32,9 +32,9 @@ function Login({ setUser, login }: Props) {
     ).value;
 
     try {
-      const response = await axios.post(
+      const response = await axios.get(
         "http://localhost:3000/api/users/login",
-        { username, password }
+        { params: { username, password } }
       );
       login();
       setUser(response.data);

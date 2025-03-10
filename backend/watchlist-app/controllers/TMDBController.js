@@ -21,14 +21,14 @@ const fetchMovieDetails = async (req, res) => {
 
 
 const findMovieController = async (req, res) => {
-  const { name } = req.query;  
+  const { title } = req.query;  
 
-  if (!name) {
-    return res.status(400).json({ message: 'Queuery is empty' });
+  if (!title) {
+    return res.status(400).json({ message: 'Query is empty' });
   }
 
   try {
-    const output = await findMovie(name); // calls funct that returns id num
+    const output = await findMovie(title); // calls funct that returns id num
 
     if (!output) {
       return res.status(404).json({ message: 'Movie not found' });

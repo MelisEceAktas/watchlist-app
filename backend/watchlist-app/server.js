@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 require('dotenv').config();
@@ -11,6 +12,7 @@ mongoose.connect(process.env.MONGO_URI)
 
 const app = express();
 
+app.use(cors());
 // Middleware
 app.use(morgan('dev'));
 //to be able to handle json
@@ -28,4 +30,4 @@ const movieRoute = require('./routes/tmdb.route');
 const userRoute = require('./routes/user.route'); 
 
 app.use('/api/users/', userRoute);
-app.use('/api/movie/', movieRoute);
+app.use('/api/movies/', movieRoute);
