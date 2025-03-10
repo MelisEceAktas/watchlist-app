@@ -5,6 +5,7 @@ import Alert from "../components/Alert";
 import { Button } from "../components/Button";
 
 interface User {
+  _id: string;
   username: string;
   password: string;
   movies: number[];

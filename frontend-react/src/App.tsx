@@ -8,6 +8,7 @@ import AccountPage from "./routes/AccountPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 interface User {
+  _id: string;
   username: string;
   password: string;
   movies: number[];

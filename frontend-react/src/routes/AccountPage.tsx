@@ -148,6 +148,28 @@ function AccountPage({ user, logout, updateUser }: Props) {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    if (
+      !window.confirm(
+        "Are you sure you want to delete your account? This cannot be undone."
+      )
+    ) {
+      return;
+    }
+
+    try {
+      const userId = user._id; // Ensure user ID is available
+      await axios.delete(`http://localhost:3000/api/users/${userId}`);
+
+      alert("Account deleted successfully.");
+      // Redirect to homepage or login page after account deletion
+      navigate("/");
+    } catch (error) {
+      console.error("❌ Error deleting account:", error);
+      alert("Failed to delete account. Please try again.");
+    }
+  };
+
   return (
     <div>
       {alertVisible && (
@@ -193,7 +215,7 @@ function AccountPage({ user, logout, updateUser }: Props) {
           <Button color="outline-warning" onClick={handleLogout}>
             Logout
           </Button>
-          <Button color="outline-danger" onClick={handleLogout}>
+          <Button color="outline-danger" onClick={handleDeleteAccount}>
             Delete Account
           </Button>
         </div>
