@@ -9,7 +9,7 @@ router.post('/', addUser);
   
 //gives all users
 router.get('/', getUsers);
-router.get('/login', getUserWithName);
+router.post('/login', getUserWithName);
 
 //gives one user
 router.get('/:id', getUser);

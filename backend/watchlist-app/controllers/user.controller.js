@@ -28,7 +28,9 @@ const getUser = async(req, res) =>{
 //getUser with name
 const getUserWithName = async(req, res) =>{
   try{
-    const {username, password } = req.body;
+    const { username, password } = req.body;
+    console.log(username);
+    console.log(password);
     const user = await User.findOne({ username });
     if(!password == user.password) {
       return res.status(400).json({message: "Cannot login because incorrect password!"});
