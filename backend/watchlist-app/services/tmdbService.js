@@ -22,8 +22,8 @@ async function getMovieDetails(movieId) {
     //genre is a list/ have to get data 
     const {title, genres, release_date, poster_path} = res.data;
     const genreNames = genres.map(genre => genre.name);
-    console.log('Movie Details:', {title, genreNames, release_date, poster_path});
-    return { title, genreNames, release_date, poster_path} ;
+    console.log('Movie Details:', {id, title, genreNames, release_date, poster_path});
+    return { id, title, genreNames, release_date, poster_path} ;
 
   } 
   catch(error){

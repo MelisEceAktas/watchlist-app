@@ -21,7 +21,7 @@ router.put('/:id/movies', addMovieToUser);
 
 //deletes user
 router.delete('/:id', deleteUser);
-router.delete('/:id/movies', delMovieToUser);
+router.delete('/:id/movies/:movieId', delMovieToUser);
 
 module.exports  = router;
   
