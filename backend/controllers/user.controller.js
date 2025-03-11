@@ -121,8 +121,7 @@ const addMovieToUser = async(req, res) =>{
 
 const delMovieToUser = async(req, res) =>{
   try{
-    const { id } = req.params; // from htpl req
-    const { movieId } = req.body;
+    const { id, movieId } = req.params; // from htpl req
     const user = await User.findById(id) ;
     
     if(!user){

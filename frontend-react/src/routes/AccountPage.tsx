@@ -12,7 +12,7 @@ interface User {
 }
 
 interface Movie {
-  id: string;
+  id: number;
   title: string;
   genreNames: string[];
   poster_path: string;
@@ -43,11 +43,11 @@ function AccountPage({ user, logout, updateUser }: Props) {
         { newUsername }
       );
 
-      console.log("✅ Username updated:", response.data);
+      console.log("Username updated:", response.data);
       updateUser({ ...user, username: newUsername }); // Update UI
       setShowUsernameForm(false); // Close the form after success
     } catch (error) {
-      console.error("❌ Error updating username:", error);
+      console.error("Error updating username:", error);
     }
   };
 
@@ -90,7 +90,7 @@ function AccountPage({ user, logout, updateUser }: Props) {
       console.log(user.username);
       console.log(movieId);
       const response = await axios.get(
-        "http://localhost:3000/api/movies/" + movieId
+        `http://localhost:3000/api/movies/` + movieId
       );
 
       if (response.status === 200 && response.data) {
@@ -106,7 +106,7 @@ function AccountPage({ user, logout, updateUser }: Props) {
 
   const searchMovie = async (title: string) => {
     try {
-      const response = await axios.get("http://localhost:3000/api/movies", {
+      const response = await axios.get(`http://localhost:3000/api/movies`, {
         params: { title },
       });
       console.log();
@@ -142,9 +142,9 @@ function AccountPage({ user, logout, updateUser }: Props) {
         }
       );
 
-      console.log("✅ Movie added:", response.data);
+      console.log("Movie added:", response.data);
     } catch (error) {
-      console.error("❌ Error adding movie:", error);
+      console.error("Error adding movie:", error);
     }
   };
 
@@ -165,8 +165,31 @@ function AccountPage({ user, logout, updateUser }: Props) {
       // Redirect to homepage or login page after account deletion
       navigate("/");
     } catch (error) {
-      console.error("❌ Error deleting account:", error);
+      console.error("Error deleting account:", error);
       alert("Failed to delete account. Please try again.");
+    }
+  };
+
+  const handleRemoveMovie = async (movieId: number) => {
+    const confirmRemove = window.confirm(
+      "Are you sure you want to remove this movie?"
+    );
+    if (!confirmRemove) return;
+
+    console.log(movieId);
+    console.log(movies);
+    try {
+      const userId = user._id;
+      const response = await axios.delete(
+        `http://localhost:3000/api/users/${userId}/movies/${movieId}`
+      );
+
+      console.log("Movie removed:", response.data);
+      // Update local state after removal
+      updateUser({ ...user, movies: response.data.movies });
+    } catch (error) {
+      console.error("Error removing movie:", error);
+      alert("Failed to remove movie.");
     }
   };
 
@@ -235,12 +258,12 @@ function AccountPage({ user, logout, updateUser }: Props) {
           Add Movie
         </button>
       </form>
-      <h3 className="mb-2">My movies:</h3>
+      <h3 className="mb-1">My movies:</h3>
       <div className="container">
         <div className="row flex-nowrap overflow-auto">
           {movies.length > 0 ? (
             movies.map((movie) => (
-              <div key={movie.id} className="col-auto mb-4">
+              <div key={movie.id} className="col-auto mb-1">
                 <div className="card shadow-sm" style={{ width: "16rem" }}>
                   <img
                     src={"https://image.tmdb.org/t/p/w300" + movie.poster_path}
@@ -254,13 +277,19 @@ function AccountPage({ user, logout, updateUser }: Props) {
                   />
                   <div className="card-body">
                     <h5 className="card-title">{movie.title}</h5>
-                    <p className="card-text">
+                    <p className="card-text mb-1">
                       <strong>Genres:</strong>
                       {movie.genreNames}
                     </p>
-                    <p className="card-text">
+                    <p className="card-text mb-1">
                       <strong>Release Date:</strong> {movie.release_date}
                     </p>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => handleRemoveMovie(movie.id)}
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
               </div>
