@@ -90,7 +90,7 @@ function AccountPage({ user, logout, updateUser }: Props) {
       console.log(user.username);
       console.log(movieId);
       const response = await axios.get(
-        "http://localhost:3000/api/movies/" + movieId
+        `http://localhost:3000/api/movies/` + movieId
       );
 
       if (response.status === 200 && response.data) {
@@ -106,7 +106,7 @@ function AccountPage({ user, logout, updateUser }: Props) {
 
   const searchMovie = async (title: string) => {
     try {
-      const response = await axios.get("http://localhost:3000/api/movies", {
+      const response = await axios.get(`http://localhost:3000/api/movies`, {
         params: { title },
       });
       console.log();
@@ -258,7 +258,7 @@ function AccountPage({ user, logout, updateUser }: Props) {
           Add Movie
         </button>
       </form>
-      <h3 className="mb-2">My movies:</h3>
+      <h3 className="mb-1">My movies:</h3>
       <div className="container">
         <div className="row flex-nowrap overflow-auto">
           {movies.length > 0 ? (
