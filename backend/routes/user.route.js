@@ -15,9 +15,9 @@ router.post('/login', getUserWithName);
 router.get('/:id', getUser);
 
 //updates user
-router.put('/:id/username', changeName);
+router.patch('/:id/username', changeName);
 //json movieId 
-router.put('/:id/movies', addMovieToUser);
+router.patch('/:id/movies', addMovieToUser);
 
 //deletes user
 router.delete('/:id', deleteUser);

@@ -38,7 +38,7 @@ function AccountPage({ user, logout, updateUser }: Props) {
     e.preventDefault();
 
     try {
-      const response = await axios.put(
+      const response = await axios.patch(
         `http://localhost:3000/api/users/${user._id}/username`,
         { newUsername }
       );
@@ -135,7 +135,7 @@ function AccountPage({ user, logout, updateUser }: Props) {
 
     try {
       const userId = user._id; // Make sure you have the user ID
-      const response = await axios.put(
+      const response = await axios.patch(
         `http://localhost:3000/api/users/${userId}/movies`,
         {
           movieId: movie.id, // Sending the movieId in the body
