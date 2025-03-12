@@ -8,7 +8,7 @@ A web application to manage your personal movie watchlist. Built with **React, N
 - Add, remove, and manage movies in your watchlist 
 
 ## 🛠 Tech Stack
-- **Frontend:** React  
+- **Frontend:** React, Bootstrap, HTML, CSS
 - **Backend:** Node.js, Express.js  
 - **Database:** MongoDB  
 - **API:** External Movie Database API  
