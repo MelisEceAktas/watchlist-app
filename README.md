@@ -11,7 +11,7 @@ A web application to manage your personal movie watchlist. Built with **React, N
 - **Frontend:** React, Bootstrap, HTML, CSS
 - **Backend:** Node.js, Express.js  
 - **Database:** MongoDB  
-- **API:** External Movie Database API  
+- **API:** External Movie Database API (TMDb)
 
 
 
