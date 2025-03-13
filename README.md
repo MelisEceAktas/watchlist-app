@@ -1,6 +1,6 @@
 A full-stack movie watchlist application where users can search for movies, save them to their personal watchlist, and manage their account. Built with **React**, **Node.js**, **MongoDB**, and **TMDb API**.
 
----
+***Made by [@MelisEceAktas](https://github.com/MelisEceAktas) and [@joonullus](https://github.com/joonullus)***
 
 ## 🚀 Features   
 ✅ **Movie Search** - Fetch movies from **TMDb API** based on user queries.  
@@ -9,7 +9,6 @@ A full-stack movie watchlist application where users can search for movies, save
 ✅ **User Authentication** - Sign up, log in, log out.  
 ✅ **Responsive Design** - Styled with **Bootstrap** and **CSS**.  
 
----
 
 ## 🛠️ Tech Stack  
 
@@ -26,7 +25,6 @@ A full-stack movie watchlist application where users can search for movies, save
 - **CORS** - Cross-origin handling  
 - **Morgan** - Logging  
 
----
 
 ## 🔧 Installation  
 
@@ -66,11 +64,7 @@ npm run dev
 ```
 Go to the link given by the terminal.
 
----
 
 ## 📌 API Routes
 All API routes are defined in the **routes** folder of the backend.
 
----
-
-***Made by [@MelisEceAktas](https://github.com/MelisEceAktas) and [@joonullus](https://github.com/joonullus)***
